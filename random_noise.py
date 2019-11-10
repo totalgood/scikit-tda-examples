@@ -32,8 +32,14 @@ def plot_to_html(fig=None, path='/midata/public/tda.html'):
     return html
 
 
-if __name__ == '__main__':
-    data = np.random.random((100,2))
+def random_noise_tda(num_points=100, num_dimensions=2, shape=None, show=False):
+    if isinstance(shape, (tuple, list)):
+        num_points, num_dimensions = shape
+    data = np.random.random((num_points, num_dimensions))
     diagrams = ripser(data)['dgms']
-    plot_diagrams(diagrams, show=False)
-    plot_to_html
+    plot_diagrams(diagrams, show=show)
+    return data, diagrams
+
+if __name__ == '__main__':
+    data, diagrams = random_noise_tda()
+    plot_to_html()
