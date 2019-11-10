@@ -14,9 +14,8 @@ HTML_HEADER = """<!DOCTYPE html>
         <meta charset="utf-8"/>
     </head>
 """
-
-HTML_FOOTER = """
-</html>"""
+HTML_HEADER = """<!DOCTYPE html>"""
+HTML_FOOTER = """</html>"""
 
 
 def plot_to_html(fig=None, path='/midata/public/tda.html'):
@@ -24,7 +23,7 @@ def plot_to_html(fig=None, path='/midata/public/tda.html'):
     tmpfile = BytesIO()
     fig.savefig(tmpfile, format='png')
     encoded = base64.b64encode(tmpfile.getvalue())
-    html = f'{HTML_HEADER}<img src=\'data:image/png;base64,{encoded}\'>{HTML_FOOTER}'.format(encoded) + 'Some more html'
+    html = f"{HTML_HEADER}<img src='data:image/png;base64,{encoded}'>{HTML_FOOTER}".format(encoded)
 
     if path:
         path = os.path.join(path, f'{__name__}_plot_to_html.html') if os.path.isdir(path) else path
