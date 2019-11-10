@@ -22,7 +22,7 @@ def plot_to_html(fig=None, path='/midata/public/tda.html'):
     fig = fig or plt.gcf() or plt.figure()
     tmpfile = BytesIO()
     fig.savefig(tmpfile, format='png')
-    encoded = base64.b64encode(tmpfile.getvalue())
+    encoded = base64.b64encode(tmpfile.getvalue()).decode('utf-8')
     html = f"{HTML_HEADER}<img src='data:image/png;base64,{encoded}'>{HTML_FOOTER}".format(encoded)
 
     if path:
